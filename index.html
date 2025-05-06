@@ -13,6 +13,7 @@
       justify-content: center;
       align-items: center;
       color: white;
+      overflow: hidden;
     }
     .container {
       background: url("swirlhub.png") no-repeat center;
@@ -22,6 +23,7 @@
       box-shadow: 0 0 25px rgba(94, 0, 255, 0.5);
       text-align: center;
       max-width: 90%;
+      z-index: 1;
     }
     h1 {
       font-size: 28px;
@@ -30,26 +32,59 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 20px;
     }
-    a {
-      display: inline-block;
-      margin-top: 15px;
-      text-decoration: none;
+    button {
+      background: #7a3cff;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
-    img {
-      width: 60px;
-      transition: transform 0.2s ease;
+    button:hover {
+      background: #5c2dc9;
     }
-    img:hover {
-      transform: scale(1.1);
+    .jumpscare {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeOut 1s ease 5s forwards;
+    }
+    .jumpscare img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="jumpscare">
+    <img src="https://static.wikia.nocookie.net/freddy-fazbears-pizzeria-simulator/images/3/36/SalvageJumpscare.gif/revision/latest?cb=20171208024545" alt="Jumpscare" loop>
+  </div>
+
   <div class="container">
     <h1>Join the Discord for script and support</h1>
-    <a href="https://discord.gg/VbsSu3hB2B" target="_blank">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/discord/discord-original.svg" alt="Discord Icon">
-    </a>
+    <button onclick="copyLink()">Copy Link</button>
   </div>
+
+  <script>
+    function copyLink() {
+      navigator.clipboard.writeText("https://discord.gg/VbsSu3hB2B").then(() => {
+        alert("Discord invite link copied to clipboard!");
+      });
+    }
+  </script>
 </body>
 </html>
