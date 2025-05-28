@@ -12,13 +12,17 @@
     }
     #logo {
       position: absolute;
-      width: 150px;
-      height: auto;
+      font-size: 48px;
+      font-family: sans-serif;
+      color: white;
+      background-color: blue;
+      padding: 20px 40px;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <img id="logo" src="dvd-logo.png" alt="DVD Logo" />
+  <div id="logo">DVD</div>
 
   <script>
     const logo = document.getElementById("logo");
@@ -27,20 +31,32 @@
     let velX = 3;
     let velY = 2;
 
+    function getRandomColor() {
+      return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+    }
+
     function moveLogo() {
       const screenWidth = window.innerWidth;
       const screenHeight = window.innerHeight;
       const logoWidth = logo.offsetWidth;
       const logoHeight = logo.offsetHeight;
 
+      let hitWall = false;
+
       posX += velX;
       posY += velY;
 
       if (posX + logoWidth >= screenWidth || posX <= 0) {
         velX = -velX;
+        hitWall = true;
       }
       if (posY + logoHeight >= screenHeight || posY <= 0) {
         velY = -velY;
+        hitWall = true;
+      }
+
+      if (hitWall) {
+        logo.style.backgroundColor = getRandomColor();
       }
 
       logo.style.left = posX + "px";
