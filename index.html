@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bouncing DVD Logo</title>
+  <title>Bouncing SWIRL</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
       background-color: black;
+      position: relative;
     }
-    #logo {
+    .swirl {
       position: absolute;
       font-size: 48px;
       font-family: sans-serif;
@@ -18,21 +19,39 @@
       background-color: blue;
       padding: 20px 40px;
       border-radius: 10px;
+      pointer-events: none;
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <div id="logo">DVD</div>
+  <div id="logo" class="swirl">SWIRL</div>
 
   <script>
     const logo = document.getElementById("logo");
     let posX = 100;
     let posY = 100;
-    let velX = 3;
-    let velY = 2;
+    let velX = 8;  // ← Increased speed
+    let velY = 6;  // ← Increased speed
 
     function getRandomColor() {
       return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+    }
+
+    function leaveTrail(x, y, color) {
+      const trail = logo.cloneNode(true);
+      trail.style.left = x + "px";
+      trail.style.top = y + "px";
+      trail.style.backgroundColor = color;
+      trail.style.opacity = 0.6;
+      document.body.appendChild(trail);
+
+      // Fade out and remove after 5 seconds
+      setTimeout(() => {
+        trail.style.transition = "opacity 1s ease-out";
+        trail.style.opacity = 0;
+        setTimeout(() => trail.remove(), 1000);
+      }, 4000);
     }
 
     function moveLogo() {
@@ -56,8 +75,12 @@
       }
 
       if (hitWall) {
-        logo.style.backgroundColor = getRandomColor();
+        const newColor = getRandomColor();
+        logo.style.backgroundColor = newColor;
       }
+
+      // Leave trail
+      leaveTrail(posX, posY, logo.style.backgroundColor);
 
       logo.style.left = posX + "px";
       logo.style.top = posY + "px";
