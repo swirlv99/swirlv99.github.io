@@ -3,36 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bouncing SWIRL</title>
+  <title>swirl</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
       background-color: black;
       position: relative;
+      font-family: sans-serif;
     }
+
+    .background-text {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 100px;
+      color: rgba(200, 200, 200, 0.05);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      text-transform: lowercase;
+    }
+
     .swirl {
       position: absolute;
       font-size: 48px;
-      font-family: sans-serif;
       color: white;
       background-color: blue;
       padding: 20px 40px;
       border-radius: 10px;
+      border: 2px solid black;
       pointer-events: none;
       user-select: none;
+      z-index: 1;
+      text-transform: lowercase;
     }
   </style>
 </head>
 <body>
-  <div id="logo" class="swirl">SWIRL</div>
+  <div class="background-text">why are you here</div>
+  <div id="logo" class="swirl">swirl</div>
 
   <script>
     const logo = document.getElementById("logo");
     let posX = 100;
     let posY = 100;
-    let velX = 8;  // ← Increased speed
-    let velY = 6;  // ← Increased speed
+    let velX = 8;
+    let velY = 6;
 
     function getRandomColor() {
       return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
@@ -46,7 +65,6 @@
       trail.style.opacity = 0.6;
       document.body.appendChild(trail);
 
-      // Fade out and remove after 5 seconds
       setTimeout(() => {
         trail.style.transition = "opacity 1s ease-out";
         trail.style.opacity = 0;
@@ -79,7 +97,6 @@
         logo.style.backgroundColor = newColor;
       }
 
-      // Leave trail
       leaveTrail(posX, posY, logo.style.backgroundColor);
 
       logo.style.left = posX + "px";
