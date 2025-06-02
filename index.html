@@ -1,4 +1,4 @@
-/* why are you looking at my site code you monkey go do something else like idk */
+// why are you looking at my site code you monkey go do something else like idk 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +20,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 100px;
-      color: rgba(200, 200, 200, 0.15); 
+      color: rgba(200, 200, 200, 0.15);
       white-space: nowrap;
       pointer-events: none;
       user-select: none;
@@ -32,7 +32,7 @@
       position: absolute;
       font-size: 32px;
       color: white;
-      background-color: #666; 
+      background-color: #666;
       padding: 20px 40px;
       border-radius: 8px;
       border: 2px solid black;
@@ -41,6 +41,7 @@
       user-select: none;
       z-index: 1;
       text-transform: lowercase;
+      opacity: 0.6; 
     }
 
     .swirl .label {
@@ -61,8 +62,8 @@
     const logo = document.getElementById("logo");
     let posX = 100;
     let posY = 100;
-    let velX = 8;
-    let velY = 6;
+    let velX = 1.0; 
+    let velY = 1.0; 
 
     function moveLogo() {
       const screenWidth = window.innerWidth;
