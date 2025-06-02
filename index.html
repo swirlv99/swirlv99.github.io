@@ -1,3 +1,4 @@
+/* why are you looking at my site code you monkey go do something else like idk */
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +20,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 100px;
-      color: rgba(200, 200, 200, 0.05);
+      color: rgba(200, 200, 200, 0.15); 
       white-space: nowrap;
       pointer-events: none;
       user-select: none;
@@ -29,22 +30,32 @@
 
     .swirl {
       position: absolute;
-      font-size: 48px;
+      font-size: 32px;
       color: white;
-      background-color: blue;
+      background-color: #666; 
       padding: 20px 40px;
-      border-radius: 10px;
+      border-radius: 8px;
       border: 2px solid black;
+      text-align: center;
       pointer-events: none;
       user-select: none;
       z-index: 1;
       text-transform: lowercase;
     }
+
+    .swirl .label {
+      font-size: 14px;
+      margin-top: 8px;
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
   <div class="background-text">why are you here</div>
-  <div id="logo" class="swirl">swirl</div>
+  <div id="logo" class="swirl">
+    swirl
+    <div class="label">creator</div>
+  </div>
 
   <script>
     const logo = document.getElementById("logo");
@@ -53,51 +64,21 @@
     let velX = 8;
     let velY = 6;
 
-    function getRandomColor() {
-      return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
-    }
-
-    function leaveTrail(x, y, color) {
-      const trail = logo.cloneNode(true);
-      trail.style.left = x + "px";
-      trail.style.top = y + "px";
-      trail.style.backgroundColor = color;
-      trail.style.opacity = 0.6;
-      document.body.appendChild(trail);
-
-      setTimeout(() => {
-        trail.style.transition = "opacity 1s ease-out";
-        trail.style.opacity = 0;
-        setTimeout(() => trail.remove(), 1000);
-      }, 4000);
-    }
-
     function moveLogo() {
       const screenWidth = window.innerWidth;
       const screenHeight = window.innerHeight;
       const logoWidth = logo.offsetWidth;
       const logoHeight = logo.offsetHeight;
 
-      let hitWall = false;
-
       posX += velX;
       posY += velY;
 
       if (posX + logoWidth >= screenWidth || posX <= 0) {
         velX = -velX;
-        hitWall = true;
       }
       if (posY + logoHeight >= screenHeight || posY <= 0) {
         velY = -velY;
-        hitWall = true;
       }
-
-      if (hitWall) {
-        const newColor = getRandomColor();
-        logo.style.backgroundColor = newColor;
-      }
-
-      leaveTrail(posX, posY, logo.style.backgroundColor);
 
       logo.style.left = posX + "px";
       logo.style.top = posY + "px";
